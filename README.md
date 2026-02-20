@@ -8,7 +8,7 @@ Gaya helps you catch data issues early with sensible defaults and zero ceremony.
 pip install gaya
 gaya init
 gaya run
-````
+```
 
 ---
 
@@ -16,13 +16,15 @@ gaya run
 
 Out of the box, Gaya runs common, practical data quality checks with clear thresholds.
 
-| Check                  | Default Behavior                    |
-| ---------------------- | ----------------------------------- |
-| Null rate per column   | Warn > 10%, fail > 25%              |
-| Required columns       | Zero nulls allowed                  |
-| Primary key uniqueness | Zero duplicates                     |
-| Row count change       | Warn > 20%, fail > 40%              |
-| Schema drift           | Warn on column add, fail on removal |
+| Check | Default Behavior |
+|---|---|
+| Null rate per column | Warn > 10%, fail > 25% |
+| Required columns | Zero nulls allowed |
+| Primary key uniqueness | Zero duplicates |
+| Row count change | Warn > 20%, fail > 40% |
+| Schema drift | Warn on column add, fail on removal |
+
+All thresholds are configurable in `gaya.yml`.
 
 ---
 
@@ -53,65 +55,57 @@ tables:
 
 ## Example Output
 
-Clear, readable output that explains *what failed* and *why it matters*.
+Clear, readable output that explains what failed and why it matters.
 
-```text
-──────────────────────────────────────────────────────
-✖  staging.orders  FAILED
-   ✖  row count dropped 38% (1.2M → 740K)
-        → A drop this large usually means a failed upstream load.
+```
+  ──────────────────────────────────────────────────────
+  ✖  staging.orders  FAILED
+     ✖  row count dropped 38% (1.2M → 740K)
+          → A drop this large usually means a failed upstream load.
 
-──────────────────────────────────────────────────────
-1 table(s) · 1 failed · 7 passed
-Finished in 2.3s
-──────────────────────────────────────────────────────
+  ──────────────────────────────────────────────────────
+  1 table(s) · 1 failed · 7 passed
+  Finished in 2.3s
+  ──────────────────────────────────────────────────────
 ```
 
 ---
 
-## Exit Codes (CI-Friendly)
+## Exit Codes
 
 Designed to integrate cleanly with CI/CD pipelines.
 
-| Code | Meaning                           |
-| ---: | --------------------------------- |
-|    0 | All checks passed                 |
-|    1 | Warnings only                     |
-|    2 | One or more checks failed         |
-|    3 | Gaya error (config or connection) |
+| Code | Meaning |
+|---|---|
+| 0 | All checks passed |
+| 1 | Warnings only |
+| 2 | One or more checks failed |
+| 3 | Gaya error (config or connection) |
 
 ---
 
 ## CI Integration
 
-### GitHub Actions
-
 ```yaml
+# GitHub Actions
 - name: Run data quality checks
   run: gaya run --quiet
 ```
 
 ---
 
-## Availability
+## Supported Sources
 
-Free for local databases:
+- Postgres
 
-* CSV
-* Postgres
-* MySQL
-
-👉 **Snowflake connector:** [https://usegaya.com](https://usegaya.com)
-
-```
+Additional connectors are planned.
 
 ---
 
-If you want, next we can:
-- tighten the **value proposition** (1–2 killer lines at the top)
-- add a **“Why Gaya?”** section
-- add **bad vs good examples**
-- or make it look extra slick with badges (CI, version, Python)
+## Project Status
 
-Just say the vibe 😄
-```
+Gaya is an early-stage project. The core check logic, Postgres adapter, and CLI are
+working. The API and configuration format may evolve, but the goal will always be the
+same: simple, predictable, easy to reason about.
+
+Feedback and contributions are welcome.
