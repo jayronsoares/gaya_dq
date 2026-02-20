@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Gaya local state
+.gaya/
+
+# Virtual environment
+.venv/
+venv/
+env/
+
+# VSCode
+.vscode/settings.json
+
+# Environment secrets — NEVER commit these
+.env
+*.env
+
+# OS
+.DS_Store
