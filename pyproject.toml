@@ -22,7 +22,7 @@ dev = [
 ]
 
 [project.scripts]
-gaya = "cli:main"
+gaya = "gaya.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["."]
